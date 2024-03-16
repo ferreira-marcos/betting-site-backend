@@ -4,6 +4,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.backend.backend.model.Bet;
 
-public interface BetRepository extends JpaRepository<Bet, Integer> {
+public interface BetRepository extends JpaRepository<Bet, Long> {
     
 }
