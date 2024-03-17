@@ -4,6 +4,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.backend.backend.Dominio.Punter;
 
-public interface PunterRepository extends JpaRepository<Punter, Long> {
+public interface IPunterRepository extends JpaRepository<Punter, Long> {
     
 }

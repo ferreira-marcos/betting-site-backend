@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import com.backend.backend.Dominio.Bet;
 // import com.backend.backend.model.Punter;
-import com.backend.backend.repository.BetRepository;
+import com.backend.backend.repository.IBetRepository;
 // import com.backend.backend.repository.PunterRepository;
 
 @RestController
@@ -23,7 +23,7 @@ import com.backend.backend.repository.BetRepository;
 public class BetController {
 
     @Autowired
-    private BetRepository betRepository;
+    private IBetRepository betRepository;
 
     @PostMapping("/newBet")
     Bet newBet(@RequestBody Bet bet){
