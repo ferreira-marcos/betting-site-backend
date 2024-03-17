@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestBody;
 
-import com.backend.backend.model.Bet;
+import com.backend.backend.Dominio.Bet;
 // import com.backend.backend.model.Punter;
 import com.backend.backend.repository.BetRepository;
 // import com.backend.backend.repository.PunterRepository;
