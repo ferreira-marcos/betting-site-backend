@@ -36,9 +36,9 @@ public class BetController {
         return betRepository.findAll();
     }
 
-    @GetMapping("/bet/{id}")
-    Bet getBetById(@PathVariable Long id) {
-        return betRepository.findById(id).orElseThrow(() -> new RuntimeException());
-    }
+    // @GetMapping("/bet/{id}")
+    // Bet getBetById(@PathVariable Long id) {
+    //     return betRepository.findById(id).orElseThrow(() -> new RuntimeException());
+    // }
 
 }
