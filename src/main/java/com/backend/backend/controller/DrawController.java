@@ -29,9 +29,19 @@ public class DrawController {
         return serviceDraw.getWinners();
     }
 
+    @GetMapping("/generateNumbers")
+    void generateNumbers(){
+        serviceDraw.generateNumbers();
+    }
+
     @GetMapping("/getNumbers")
     List<Integer> getGenerateNumbers(){
-        return serviceDraw.generateNumbers();
+        return serviceDraw.getNumbers();
+    }
+
+    @GetMapping("/getRoundsOfDrawing")
+    int getRoundsOfDrawing(){
+        return serviceDraw.getRoundsOfDrawing();
     }
 
     

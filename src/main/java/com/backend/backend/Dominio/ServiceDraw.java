@@ -25,41 +25,58 @@ public class ServiceDraw {
     }
 
 
-    private boolean isAddedNumber = false;
+    // private boolean isAddedNumber = false;
+    private int roundsOfDrawing = 0;
 
     int j = 6;
+    // boolean isWinnersEmpty = true;  
 
-    public List<Integer> generateNumbers() {
-        
-        if(initialArray.size() <30){
+    public int getRoundsOfDrawing(){
+        return roundsOfDrawing;
+    }
 
-            if (initialArray.isEmpty()) {
-                
-                for (int i = 0; i < 4; i++) {
-                    // generateOneNumber();
-                    initialArray.add(i+1);
-                    // System.out.println("---" + initialArray);
-                }
-            }
-    
-            if (initialArray.size() >= 4 && !isAddedNumber) {
-                // generateOneNumber();
-                initialArray.add(j);
-                j++;
-                // System.out.println("===========>" + initialArray);
-                isAddedNumber = true;
-            } 
-    
-            else if (isAddedNumber) {
-                isAddedNumber = false;
-            }
-        }
-        
-
+    public List<Integer> getNumbers(){
+        // System.out.println("===================================================>>>>>>>>>>>>>>>>>>>>>>"+initialArray);
         return initialArray;
     }
 
+    boolean isAddedNumber = false;
+
+    public void generateNumbers() {
+
+                if (initialArray.isEmpty()) {
+                
+                    for (int i = 0; i < 5; i++) {
+                        // generateOneNumber();
+                        initialArray.add(i+1);
+                        // System.out.println("---" + initialArray);
+                    }
+                    roundsOfDrawing++;
+                    
+                }
+                
+
+                while(winners.isEmpty() && isAddedNumber){
+                    
+                    if (initialArray.size() >= 5) {
+                        // generateOneNumber();
+                        System.out.println("===================>"+roundsOfDrawing);
+                        initialArray.add(j);
+                        j++;
+                        roundsOfDrawing++;
+                        // isAddedNumber = true;
+                    } 
+            
+                    // else if (isAddedNumber) {
+                    //     isAddedNumber = false;
+                    // }
+                    comparingBets();
+                }
+
+    }
+
     public void generateOneNumber() {
+        
         random = new Random();
         int number = random.nextInt(1, 51);
         // garantir que o valor gerado aleatoriamente não esteja presente no array
@@ -68,6 +85,7 @@ public class ServiceDraw {
         }
 
         initialArray.add(number);
+       
     }
 
     public List<Bet> getWinners() {
@@ -85,6 +103,7 @@ public class ServiceDraw {
     }
 
     public void comparingBets() {
+        System.out.println("===================================================>>>>>>>>>>>>>>>>>>>>>>"+initialArray);
 
         // recupera a lista de apostas do banco
         List<Bet> bets = betRepository.findAll();
@@ -93,7 +112,7 @@ public class ServiceDraw {
         // itera sobre o número de apostas
         for (int index = 0; index < bets.size(); index++) {
             int numbersMatched = 0;
-            System.out.println("--------------------"+bets.get(index));
+            // System.out.println("--------------------"+bets.get(index));
 
             // seleciona uma aposta
             String betsNumbersString = bets.get(index).getNumbers();
@@ -109,16 +128,30 @@ public class ServiceDraw {
                 // System.out.println("iterações:"+j);
                 if (initialArray.contains(betNumberstInt.get(j))) {
                     System.out.println("xxxx>"+ bets.get(index));
-                    System.out.println("----------------------numberMatched:"+numbersMatched);
+                    // System.out.println("----------------------numberMatched:"+numbersMatched);
                     numbersMatched++;
                 }
 
                 if (numbersMatched == 5) {
                     System.out.println("====>"+ bets.get(index));
+                    Bet winner = bets.get(index);
                     winnerBets(bets.get(index));
+
+                    //testar se há outro ganhador, ou seja, que tenha os mesmos números
+                    for (int i = bets.indexOf(winner); i < bets.size(); i++) {
+                        // isWinnersEmpty = false;
+                        if(bets.get(i).getNumbers().equals(winner.getNumbers())){
+                            winnerBets(bets.get(i));
+                        }
+                    }
+                    return;
                 }
+                // else {
+                //     generateNumbers();
+                // }
             }
         }
+        // generateNumbers();
     }
 
 }
