@@ -6,15 +6,17 @@ import java.util.Random;
 import java.util.stream.Collectors;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import com.backend.backend.repository.IBetRepository;
 
+@Component
 public class ServiceDraw {
 
     IBetRepository betRepository;
 
     Random random;
-    private ArrayList<Integer> initialArray = new ArrayList<>();
+    private List<Integer> initialArray = new ArrayList<>();
     private ArrayList<Bet> winners = new ArrayList<>();
 
     @Autowired
@@ -22,75 +24,82 @@ public class ServiceDraw {
         this.betRepository = betRepository;
     }
 
-    // gera o array inicial de números que serão usados no sorteio
-    public ArrayList<Integer> generateInitialNumbers() {
-        random = new Random();
-        int count = 5;
 
-        for (int i = 0; i < count; i++) {
-            int number = random.nextInt(1, 51);
+    private boolean isAddedNumber = false;
 
-            // se sertificar que não sejam gerados números repetidos
-            if (!initialArray.contains(number)) {
-                initialArray.add(number);
-            } else {
-                count++;
+    public List<Integer> generateNumbers() {
+        if(initialArray.size() <30){
+
+            if (initialArray.isEmpty()) {
+                
+                for (int i = 0; i < 4; i++) {
+                    generateOneNumber();
+                    System.out.println("---" + initialArray);
+                }
+            }
+    
+            if (initialArray.size() >= 4 && !isAddedNumber) {
+                generateOneNumber();
+                System.out.println("===========>" + initialArray);
+                isAddedNumber = true;
+            } 
+    
+            else if (isAddedNumber) {
+                isAddedNumber = false;
             }
         }
-        return initialArray;
+        
 
+        return initialArray;
     }
 
-    public int generateOneNumber() {
-        
+    public void generateOneNumber() {
+        random = new Random();
         int number = random.nextInt(1, 51);
-        //garantir que o valor gerado aleatóriamente não esteja presente no array
+        // garantir que o valor gerado aleatoriamente não esteja presente no array
         while (initialArray.contains(number)) {
             number = random.nextInt(1, 51);
         }
-        initialArray.add(number);
 
-        return number;
+        initialArray.add(number);
     }
 
-    public List<Bet> getWinners(){
+    public List<Bet> getWinners() {
         return winners;
     }
 
+    public void winnerBets(Bet bet) {
 
-    public void winnerBets(Bet bet){
-
-        if(!winners.contains(bet)){
+        if (!winners.contains(bet)) {
             winners.add(bet);
 
         }
     }
 
-
     public void comparingBets() {
 
-        //recupera a lista de apostas do banco
+        // recupera a lista de apostas do banco
         List<Bet> bets = betRepository.findAll();
-        
-        int  numbersMatched = 0;
-        
-        //itera sobre o número de apostas
+
+        int numbersMatched = 0;
+
+        // itera sobre o número de apostas
         for (int index = 0; index < bets.size(); index++) {
 
-            //seleciona uma aposta
+            // seleciona uma aposta
             String betsNumbersString = bets.get(index).getNumbers();
-            
-            //conversão dos números para inteiros
+
+            // conversão dos números para inteiros
             List<Integer> betNumberstInt = Arrays.stream(betsNumbersString.split(","))
-                                            .map(Integer::parseInt)
-                                            .collect(Collectors.toList());
+                    .map(Integer::parseInt)
+                    .collect(Collectors.toList());
 
             for (int j = 0; j < betNumberstInt.size(); j++) {
 
-                if(initialArray.contains(betNumberstInt.get(j))){
+                if (initialArray.contains(betNumberstInt.get(j))) {
                     numbersMatched++;
                 }
-                if(numbersMatched == 5){
+                if (numbersMatched == 5) {
                     winnerBets(bets.get(index));
                 }
             }
