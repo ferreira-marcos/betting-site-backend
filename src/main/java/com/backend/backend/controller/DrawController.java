@@ -17,10 +17,6 @@ import com.backend.backend.repository.IBetRepository;
 public class DrawController {
     
 
-    @Autowired
-    private IBetRepository betRepository;
-
-
     private final ServiceDraw serviceDraw;
 
     @Autowired
@@ -38,6 +34,7 @@ public class DrawController {
         return serviceDraw.generateNumbers();
     }
 
+    
 
 
 
