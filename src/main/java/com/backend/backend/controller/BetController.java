@@ -28,14 +28,13 @@ public class BetController {
 
     @PostMapping("/newBet")
     Bet newBet(@RequestBody Bet bet){
-        System.out.println("===========-------------================> "+betRepository.count());
+
         return betRepository.save(bet);
 
     }
 
     @GetMapping("/allbets")
     List<Bet> getAllBets() {
-        System.out.println("===========-------------================>getAll "+betRepository.count());
         return betRepository.findAll();
     }
 

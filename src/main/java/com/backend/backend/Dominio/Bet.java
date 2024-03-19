@@ -17,22 +17,14 @@ public class Bet {
     @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="seq")
     @SequenceGenerator(name="seq", sequenceName="ID_SEQ", allocationSize=1, initialValue=1000)
     private Long id;
-
-    // private String name;
-    // private Long cpf;
     private String numbers;
 
     @ManyToOne(cascade = CascadeType.ALL) 
     private Punter punter;
 
-    // @Autowired
-    // public Bet(Punter punter, String numbers) {
-    //     this.punter = punter;
-    //     this.numbers = numbers;
-    // }
 
     public Bet() {
-        // Você pode inicializar atributos padrão aqui, se necessário
+        
     }
 
 
@@ -42,26 +34,7 @@ public class Bet {
     public void setId(Long id) {
         this.id = id;
     }
-    // public String getNumbers() {
-    //     return numbers;
-    // }
-    // public void setNumbers(String numbers) {
-    //     this.numbers = numbers;
-    // }
-    // public String getName() {
-    //     return name;
-    // }
-    // public void setName(String name) {
-    //     this.name = name;
-    // }
-    // public Long getCpf() {
-    //     return cpf;
-    // }
-    // public void setCpf(Long cpf) {
-    //     this.cpf = cpf;
-    // }
-    
-    
+
   
 
     public String getNumbers() {

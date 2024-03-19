@@ -1,6 +1,7 @@
 package com.backend.backend.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -51,8 +52,15 @@ public class DrawController {
     String eraseBetsDB(){
         betRepository.deleteAll();
         serviceDraw.deleteAllWinners();
-        System.out.println("===========-------------================> "+betRepository.count());
+        serviceDraw.deleteInitialArray();
+        // System.out.println("===========-------------================> "+betRepository.count());
         return  "repositório deletado";
+    }
+
+    @GetMapping("/getBetsNumbers")
+    Map<Integer, Integer> getAllNumbersBet(){
+        System.out.println("------------>>"+serviceDraw.getAllNumbersBet());
+        return serviceDraw.getAllNumbersBet();
     }
 
     

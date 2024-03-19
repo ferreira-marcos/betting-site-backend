@@ -2,9 +2,12 @@ package com.backend.backend.Dominio;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.Random;
 import java.util.stream.Collectors;
 import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -23,25 +26,56 @@ public class ServiceDraw {
         this.betRepository = betRepository;
     }
 
-
-    // private boolean isAddedNumber = false;
     private int roundsOfDrawing = 0;
 
     int j = 6;
-    // boolean isWinnersEmpty = true;  
 
     public int getRoundsOfDrawing(){
         return roundsOfDrawing;
     }
 
     public List<Integer> getNumbers(){
-        // System.out.println("===================================================>>>>>>>>>>>>>>>>>>>>>>"+initialArray);
         return initialArray;
     }
 
     public void deleteAllWinners(){
         winners.clear();
         
+    }
+
+    public void deleteInitialArray(){
+        initialArray.clear();
+    }
+
+    public Map<Integer, Integer> getAllNumbersBet(){
+
+        List<Bet> bets = betRepository.findAll();
+
+        Map<Integer, Integer> allNumbersBet = new HashMap<>();
+        
+        for (int index = 0; index < bets.size(); index++) {
+
+            String betsNumbersString = bets.get(index).getNumbers();
+
+            List<Integer> betNumberstInt = Arrays.stream(betsNumbersString.split(","))
+                    .map(Integer::parseInt)
+                    .collect(Collectors.toList());
+
+            for (int j = 0; j < betNumberstInt.size(); j++) {
+
+                if(allNumbersBet.containsKey(betNumberstInt.get(j))) {
+                    allNumbersBet.put(betNumberstInt.get(j), allNumbersBet.get(betNumberstInt.get(j))+1);
+                }else{
+
+                    allNumbersBet.put(betNumberstInt.get(j), 1);
+                }
+
+
+            }
+        }
+
+        return allNumbersBet;
+
     }
 
     public void generateNumbers() {
@@ -118,6 +152,7 @@ public class ServiceDraw {
             List<Integer> betNumberstInt = Arrays.stream(betsNumbersString.split(","))
                     .map(Integer::parseInt)
                     .collect(Collectors.toList());
+
             System.out.println("--->"+ betNumberstInt);
 
             for (int j = 0; j < betNumberstInt.size(); j++) {
