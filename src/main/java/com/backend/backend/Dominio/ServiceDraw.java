@@ -14,7 +14,6 @@ import com.backend.backend.repository.IBetRepository;
 public class ServiceDraw {
 
     IBetRepository betRepository;
-
     Random random;
     private List<Integer> initialArray = new ArrayList<>();
     private ArrayList<Bet> winners = new ArrayList<>();
@@ -40,38 +39,32 @@ public class ServiceDraw {
         return initialArray;
     }
 
-    boolean isAddedNumber = false;
 
     public void generateNumbers() {
 
-                if (initialArray.isEmpty()) {
-                
-                    for (int i = 0; i < 5; i++) {
-                        // generateOneNumber();
-                        initialArray.add(i+1);
-                        // System.out.println("---" + initialArray);
-                    }
-                    roundsOfDrawing++;
-                    
+            if (initialArray.isEmpty()) {
+                for (int i = 0; i < 5; i++) {
+                    initialArray.add(i + 1);
                 }
-                
+                roundsOfDrawing=1;
+            }
 
-                while(winners.isEmpty() && isAddedNumber){
+            comparingBets();
+            if (winners.isEmpty()) {
+    
+                while (initialArray.size() <= 30) {
                     
-                    if (initialArray.size() >= 5) {
-                        // generateOneNumber();
-                        System.out.println("===================>"+roundsOfDrawing);
-                        initialArray.add(j);
-                        j++;
-                        roundsOfDrawing++;
-                        // isAddedNumber = true;
-                    } 
-            
-                    // else if (isAddedNumber) {
-                    //     isAddedNumber = false;
-                    // }
+                    if (!winners.isEmpty()) {
+                        break; // Se initialArray já tem 30 elementos, não adicione mais números
+                    }
+                    initialArray.add(j);
+                    j++;
+                    roundsOfDrawing++;
                     comparingBets();
-                }
+                // }
+            }
+        }
+        
 
     }
 
@@ -103,7 +96,7 @@ public class ServiceDraw {
     }
 
     public void comparingBets() {
-        System.out.println("===================================================>>>>>>>>>>>>>>>>>>>>>>"+initialArray);
+        // System.out.println("===================================================>>>>>>>>>>>>>>>>>>>>>>"+initialArray);
 
         // recupera a lista de apostas do banco
         List<Bet> bets = betRepository.findAll();
@@ -127,13 +120,13 @@ public class ServiceDraw {
 
                 // System.out.println("iterações:"+j);
                 if (initialArray.contains(betNumberstInt.get(j))) {
-                    System.out.println("xxxx>"+ bets.get(index));
+                    // System.out.println("xxxx>"+ bets.get(index));
                     // System.out.println("----------------------numberMatched:"+numbersMatched);
                     numbersMatched++;
                 }
 
                 if (numbersMatched == 5) {
-                    System.out.println("====>"+ bets.get(index));
+                    // System.out.println("====>"+ bets.get(index));
                     Bet winner = bets.get(index);
                     winnerBets(bets.get(index));
 
