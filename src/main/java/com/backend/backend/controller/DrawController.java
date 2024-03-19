@@ -53,13 +53,13 @@ public class DrawController {
         betRepository.deleteAll();
         serviceDraw.deleteAllWinners();
         serviceDraw.deleteInitialArray();
-        // System.out.println("===========-------------================> "+betRepository.count());
+        serviceDraw.resetRoundsOfDrawing();
         return  "repositório deletado";
     }
 
     @GetMapping("/getBetsNumbers")
     Map<Integer, Integer> getAllNumbersBet(){
-        System.out.println("------------>>"+serviceDraw.getAllNumbersBet());
+       
         return serviceDraw.getAllNumbersBet();
     }
 
