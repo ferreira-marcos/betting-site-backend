@@ -7,6 +7,7 @@ import org.springframework.data.annotation.ReadOnlyProperty;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -27,18 +28,17 @@ public class BetController {
 
     @PostMapping("/newBet")
     Bet newBet(@RequestBody Bet bet){
+        System.out.println("===========-------------================> "+betRepository.count());
         return betRepository.save(bet);
 
     }
 
     @GetMapping("/allbets")
     List<Bet> getAllBets() {
+        System.out.println("===========-------------================>getAll "+betRepository.count());
         return betRepository.findAll();
     }
 
-    // @GetMapping("/bet/{id}")
-    // Bet getBetById(@PathVariable Long id) {
-    //     return betRepository.findById(id).orElseThrow(() -> new RuntimeException());
-    // }
+
 
 }

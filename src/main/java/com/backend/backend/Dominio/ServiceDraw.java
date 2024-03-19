@@ -39,6 +39,10 @@ public class ServiceDraw {
         return initialArray;
     }
 
+    public void deleteAllWinners(){
+        winners.clear();
+        
+    }
 
     public void generateNumbers() {
 
