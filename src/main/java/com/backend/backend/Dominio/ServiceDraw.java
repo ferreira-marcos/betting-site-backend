@@ -46,21 +46,21 @@ public class ServiceDraw {
                 for (int i = 0; i < 5; i++) {
                     initialArray.add(i + 1);
                 }
-                roundsOfDrawing=1;
+                roundsOfDrawing++;
             }
 
             comparingBets();
             if (winners.isEmpty()) {
     
-                while (initialArray.size() <= 30) {
+                while (initialArray.size() < 30) {
                     
                     if (!winners.isEmpty()) {
                         break; // Se initialArray já tem 30 elementos, não adicione mais números
                     }
                     initialArray.add(j);
                     j++;
-                    roundsOfDrawing++;
                     comparingBets();
+                    roundsOfDrawing++;
                 // }
             }
         }
