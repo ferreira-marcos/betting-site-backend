@@ -1,10 +1,11 @@
-package com.backend.backend.Dominio;
+package com.backend.backend.Domain;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 
 
+// cria o dado do apostador que ficará no banco
 @Entity
 public class Punter {
 
@@ -30,12 +31,6 @@ public class Punter {
     public void setCpf(Long cpf) {
         this.cpf = cpf;
     }
-
-    @Override
-    public String toString() {
-        return "Punter [id=" + id + ", name=" + name + ", cpf=" + cpf + "]";
-    }
-
     
     
 }

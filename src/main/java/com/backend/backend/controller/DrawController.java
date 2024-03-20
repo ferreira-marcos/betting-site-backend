@@ -2,15 +2,13 @@ package com.backend.backend.controller;
 
 import java.util.List;
 import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.backend.backend.Dominio.Bet;
-import com.backend.backend.Dominio.ServiceDraw;
+import com.backend.backend.Domain.Bet;
+import com.backend.backend.Domain.ServiceDraw;
 import com.backend.backend.repository.IBetRepository;
 
 
@@ -18,7 +16,6 @@ import com.backend.backend.repository.IBetRepository;
 @CrossOrigin("http://localhost:3000")
 public class DrawController {
     
-
     private final ServiceDraw serviceDraw;
     @Autowired
     private IBetRepository betRepository;
@@ -63,13 +60,10 @@ public class DrawController {
         return serviceDraw.getAllNumbersBet();
     }
 
-    
-
-
-
-
-    
-
+    @GetMapping("/calulateDiscount")
+    int calulateDiscount(){
+        return serviceDraw.calulateDiscount();
+    }
 
 
 }
