@@ -99,8 +99,8 @@ public class ServiceDraw {
             // gera os primeiros 5 números do sorteio
             if (initialArray.isEmpty()) {
                 for (int i = 0; i < 5; i++) {
-                    // generateOneNumber();
-                    initialArray.add(i+1);
+                    generateOneNumber();
+            
                 }
                 // incrementa o contador de rodadas
                 roundsOfDrawing++;
