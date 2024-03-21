@@ -16,12 +16,15 @@ import com.backend.backend.repository.IBetRepository;
 @CrossOrigin("http://localhost:3000")
 public class BetController {
 
-    @Autowired
-    private IBetRepository betRepository;
-    @Autowired
+    private IBetRepository betRepository;   
     private ServiceBet serviceBet;
 
 
+    @Autowired
+    public BetController(IBetRepository betRepository, ServiceBet serviceBet) {
+        this.betRepository = betRepository;
+        this.serviceBet = serviceBet;
+    }
 
     @PostMapping("/newBet")
     Bet newBet(@RequestBody Bet bet){
