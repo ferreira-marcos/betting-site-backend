@@ -95,7 +95,7 @@ public class ServiceDraw {
             if (initialArray.isEmpty()) {
                 for (int i = 0; i < 5; i++) {
                     generateOneNumber();
-            
+                
                 }
              
                 // incrementa o contador de rodadas
@@ -115,6 +115,7 @@ public class ServiceDraw {
                         break; 
                     }
                     generateOneNumber();
+                    
                     comparingBets();
 
                     // incrementa o contador de rodadas

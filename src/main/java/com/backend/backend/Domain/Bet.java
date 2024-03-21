@@ -22,6 +22,12 @@ public class Bet {
     @ManyToOne(cascade = CascadeType.ALL) 
     private Punter punter;
 
+    
+    public Bet(Punter punter, String numbers) {
+        this.punter = punter;
+        this.numbers = numbers;
+    }
+
     public Bet() {
     }
 

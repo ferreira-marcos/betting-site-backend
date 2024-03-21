@@ -10,14 +10,8 @@ import jakarta.persistence.Id;
 public class Punter {
 
     @Id
-    @GeneratedValue
-    private long id;
-    private String name;
     private Long cpf;
-
-    public Long getId() {
-        return id;
-    }
+    private String name;
     
     public String getName() {
         return name;

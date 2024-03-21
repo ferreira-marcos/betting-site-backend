@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import com.backend.backend.Domain.Bet;
+import com.backend.backend.Domain.ServiceBet;
 import com.backend.backend.repository.IBetRepository;
 
 @RestController
@@ -17,11 +18,14 @@ public class BetController {
 
     @Autowired
     private IBetRepository betRepository;
+    @Autowired
+    private ServiceBet serviceBet;
+
+
 
     @PostMapping("/newBet")
     Bet newBet(@RequestBody Bet bet){
-        return betRepository.save(bet);
-
+        return serviceBet.createBet(bet);
     }
 
     @GetMapping("/allbets")
