@@ -94,7 +94,8 @@ public class ServiceDraw {
             // gera os primeiros 5 números do sorteio
             if (initialArray.isEmpty()) {
                 for (int i = 0; i < 5; i++) {
-                    generateOneNumber();
+                    // generateOneNumber();
+                    initialArray.add(i+1);
             
                 }
                 // incrementa o contador de rodadas
@@ -159,20 +160,6 @@ public class ServiceDraw {
         return convertedValue;
     }
 
-    public boolean findAnotherWinner( Bet winners, Bet possibleWinner ){
-        List<Integer> winnerNumbers = convertListStringToInt(winners.getNumbers());
-        List<Integer> possibleWinnerNumbers = convertListStringToInt(possibleWinner.getNumbers());
-
-        Collections.sort(winnerNumbers);
-        Collections.sort(possibleWinnerNumbers);
-
-        for (int i = 0; i < winnerNumbers.size(); i++) {
-            if(!winnerNumbers.get(i).equals(possibleWinnerNumbers.get(i))){
-                return false;
-            }
-        }
-        return true;
-    }
 
     public void comparingBets() {
 
@@ -197,17 +184,8 @@ public class ServiceDraw {
 
                 // quando os 5 números da aposta estão entre os sorteados é cosiderada uma aposta vencedora
                 if (numbersMatched == 5) {
-                    Bet winner = bets.get(index);
                     winnerBets(bets.get(index));
 
-                    //testar se há outro ganhador, ou seja, que tenha os mesmos números
-                    for (int i = bets.indexOf(winner); i < bets.size(); i++) {
-                        if(findAnotherWinner(winner, bets.get(i))){
-
-                            winnerBets(bets.get(i));
-                        }
-                    }
-                    return;
                 }
 
             }
