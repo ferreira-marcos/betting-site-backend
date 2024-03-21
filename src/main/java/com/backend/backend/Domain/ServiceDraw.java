@@ -2,7 +2,6 @@ package com.backend.backend.Domain;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Random;
 import java.util.stream.Collectors;
@@ -50,6 +49,10 @@ public class ServiceDraw {
         roundsOfDrawing = 0;
 
     }
+    public List<Bet> getWinners() {
+        // comparingBets();
+        return winners;
+    }
 
     // calcula desconto recebido pelo vencedor
     public int calulateDiscount(){
@@ -82,25 +85,22 @@ public class ServiceDraw {
                 }
             }
         }
-
         return allNumbersBet;
-
     }
 
     // gera os números sorteados aleatóriamente
     public void generateNumbers() {
             random = new Random();
-
             // gera os primeiros 5 números do sorteio
             if (initialArray.isEmpty()) {
                 for (int i = 0; i < 5; i++) {
                     generateOneNumber();
             
                 }
+             
                 // incrementa o contador de rodadas
                 roundsOfDrawing++;
             }
-
             // chama o método que verifica se os números gerados foram escolhidos por um jogador
             comparingBets();
 
@@ -138,10 +138,7 @@ public class ServiceDraw {
         initialArray.add(number);
     }
 
-    public List<Bet> getWinners() {
-        comparingBets();
-        return winners;
-    }
+  
 
     public void winnerBets(Bet bet) {
         if (!winners.contains(bet)) {
