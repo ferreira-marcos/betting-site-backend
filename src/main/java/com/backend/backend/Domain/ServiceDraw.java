@@ -8,10 +8,8 @@ import java.util.Random;
 import java.util.stream.Collectors;
 import java.util.List;
 import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
 import com.backend.backend.repository.IBetRepository;
 
 @Component
@@ -70,9 +68,6 @@ public class ServiceDraw {
 
             String betsNumbersString = bets.get(index).getNumbers();
 
-            // List<Integer> betNumberstInt = Arrays.stream(betsNumbersString.split(","))
-            //         .map(Integer::parseInt)
-            //         .collect(Collectors.toList());
             List<Integer> betNumberstInt = convertListStringToInt(betsNumbersString);
 
             for (int j = 0; j < betNumberstInt.size(); j++) {
@@ -184,7 +179,6 @@ public class ServiceDraw {
         // recupera a lista de apostas do banco
         List<Bet> bets = betRepository.findAll();
 
-        
         // itera sobre o número de apostas
         for (int index = 0; index < bets.size(); index++) {
             int numbersMatched = 0;
